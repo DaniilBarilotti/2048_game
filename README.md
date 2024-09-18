@@ -1,4 +1,5 @@
 [DEMO LINK](https://daniilbarilotti.github.io/2048_game/)
+
 This code implements a basic version of the popular 2048 game, where players combine numbered tiles on a 4x4 grid to reach the 2048 tile. The game dynamically updates based on user keyboard inputs (arrow keys), and it includes game logic for starting, moving tiles, and checking for a win or loss condition.
 
 1. HTML Structure
