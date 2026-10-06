@@ -1,6 +1,5 @@
 'use strict';
 
-// write your code here
 const fieldOfGame = document.querySelector('tbody');
 const button = document.querySelector('.button');
 const gameScore = document.querySelector('.game-score');
@@ -191,6 +190,12 @@ function isBoardStateChanged(originalBoard, newBoard) {
 }
 
 document.addEventListener('keyup', (e) => {
+  const arrows = ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'];
+
+  if (!board || !arrows.includes(e.code)) {
+    return;
+  }
+
   e.preventDefault();
 
   const originalBoard = saveBoardState();
@@ -218,3 +223,4 @@ document.addEventListener('keyup', (e) => {
     setCells();
   }
 });
+

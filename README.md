@@ -26,7 +26,7 @@ npm ci
 npm start
 ```
 
-Scripts: `npm run build`, `npm run lint`, `npm run test:only`. The project uses the Mate Academy starter toolchain; these commands are available, but their success is not implied by this README.
+Scripts: `npm run build`, `npm run lint`, `npm run test:only`. Run `npm run test:state` for the dependency-free state regression checks (key guard and tile merging). The project uses the Mate Academy starter toolchain; these commands are available, but their success is not implied by this README.
 
 ## Scope and credits
 
