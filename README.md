@@ -6,7 +6,7 @@ A browser puzzle built with vanilla JavaScript and SCSS. Combine matching tiles 
 
 ## Controls
 
-Select **Start**, then use the arrow keys. **Restart** resets the board and score. A new tile appears only after a move changes the board.
+Select **Start**, then use the arrow keys or swipe on the board in any of four directions. Short taps are ignored; scrolling is disabled only on the board. **Restart** resets the board and score. A new tile appears only after a move changes the board.
 
 ## Implementation
 
@@ -26,8 +26,8 @@ npm ci
 npm start
 ```
 
-Scripts: `npm run build`, `npm run lint`, `npm run test:only`. Run `npm run test:state` for the dependency-free state regression checks (key guard and tile merging). The project uses the Mate Academy starter toolchain; these commands are available, but their success is not implied by this README.
+Scripts: `npm run build`, `npm run lint`, `npm run test:only`. Run `npm run test:state` for the dependency-free state regression checks (key guards, tile merging, swipe directions, threshold and cancellation). The project uses the Mate Academy starter toolchain; these commands are available, but their success is not implied by this README.
 
 ## Scope and credits
 
-Learning implementation of the existing 2048 game concept, not an original game invention. Starter scripts and the existing GPL-3.0 licence are retained. Current controls are keyboard-based; touch controls and state persistence are possible follow-up improvements.
+Learning implementation of the existing 2048 game concept, not an original game invention. Starter scripts and the existing GPL-3.0 licence are retained. Keyboard and touch controls share the same movement logic. State persistence is a possible follow-up improvement.

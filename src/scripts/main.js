@@ -189,18 +189,14 @@ function isBoardStateChanged(originalBoard, newBoard) {
   return JSON.stringify(originalBoard) !== JSON.stringify(newBoard);
 }
 
-document.addEventListener('keyup', (e) => {
-  const arrows = ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'];
-
-  if (!board || !arrows.includes(e.code)) {
+function playMove(direction) {
+  if (!board) {
     return;
   }
 
-  e.preventDefault();
-
   const originalBoard = saveBoardState();
 
-  switch (e.code) {
+  switch (direction) {
     case 'ArrowLeft':
       moveLeft();
       break;
@@ -222,5 +218,72 @@ document.addEventListener('keyup', (e) => {
     placeBlocks();
     setCells();
   }
+}
+
+const arrows = ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'];
+
+document.addEventListener('keydown', (event) => {
+  if (board && arrows.includes(event.code)) {
+    event.preventDefault();
+  }
 });
 
+document.addEventListener('keyup', (event) => {
+  if (board && arrows.includes(event.code)) {
+    event.preventDefault();
+    playMove(event.code);
+  }
+});
+
+// Pointer events support touch screens and mouse dragging with the same rules.
+const touchSurface = fieldOfGame.closest('table');
+const swipeThreshold = 30;
+let swipeStart = null;
+
+touchSurface.style.touchAction = 'none';
+touchSurface.style.userSelect = 'none';
+
+touchSurface.addEventListener('pointerdown', (event) => {
+  if (!event.isPrimary || event.button !== 0 || !board) {
+    swipeStart = null;
+
+    return;
+  }
+
+  swipeStart = {
+    id: event.pointerId,
+    x: event.clientX,
+    y: event.clientY,
+  };
+
+  touchSurface.setPointerCapture(event.pointerId);
+});
+
+touchSurface.addEventListener('pointerup', (event) => {
+  if (!swipeStart || event.pointerId !== swipeStart.id) {
+    return;
+  }
+
+  const dx = event.clientX - swipeStart.x;
+  const dy = event.clientY - swipeStart.y;
+
+  swipeStart = null;
+
+  if (Math.max(Math.abs(dx), Math.abs(dy)) < swipeThreshold) {
+    return;
+  }
+
+  if (Math.abs(dx) > Math.abs(dy)) {
+    playMove(dx > 0 ? 'ArrowRight' : 'ArrowLeft');
+  } else {
+    playMove(dy > 0 ? 'ArrowDown' : 'ArrowUp');
+  }
+});
+
+touchSurface.addEventListener('pointercancel', () => {
+  swipeStart = null;
+});
+
+touchSurface.addEventListener('lostpointercapture', () => {
+  swipeStart = null;
+});
