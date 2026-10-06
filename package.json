@@ -11,7 +11,8 @@
     "deploy": "mate-scripts deploy",
     "update": "mate-scripts update",
     "postinstall": "npm run update",
-    "test": "npm run lint && npm run test:only"
+    "test": "npm run lint && npm run test:only",
+    "test:state": "node tests/game-state.test.cjs"
   },
   "keywords": [],
   "author": "Mate Academy",
